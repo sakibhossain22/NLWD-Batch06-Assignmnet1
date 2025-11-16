@@ -7,3 +7,14 @@ const formatValue = (value: string | number | boolean) => {
         return value === true ? false : true
     }
 }
+
+
+const getLength = (value: string | number[]) => {
+
+    if (typeof value === 'string') {
+        return value.length
+    } else if (Array.isArray(value)) {
+       return value.length
+    }
+
+}
