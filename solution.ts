@@ -33,12 +33,12 @@ class Person {
 
 //--------------------------------------------------Problem 4 --------------------------------------------
 
-type Books = {
-    title : string;
-    rating : number
+type TBooks = {
+    title: string;
+    rating: number
 }
 
-const filterByRating = (arr : Books[]) : Books[] => {
+const filterByRating = (arr: TBooks[]): TBooks[] => {
     return arr.filter(book => book.rating >= 4)
 }
 
@@ -48,3 +48,37 @@ const filterByRating = (arr : Books[]) : Books[] => {
 
 
 // -------------------------------- problem 5 --------------------------------------------------
+
+
+type Users = {
+    id: number;
+    name: string;
+    email: string;
+    isActive: boolean
+}
+
+
+const filterActiveUsers = (users: Users[]): Users[] => {
+    return users.filter(user => user.isActive === true)
+}
+
+
+// ---------------------'problem 6--------------------------
+
+
+
+interface Book {
+    title: string;
+    author: string;
+    publishedYear: number;
+    isAvailable: boolean;
+}
+
+const printBookDetails = (books: Book) => {
+    return `Title: ${books.title}, Author: ${books.author}, Published: ${books.publishedYear}, Available: ${books.isAvailable ? 'Yes' : 'No'}`
+}
+
+
+
+
+
