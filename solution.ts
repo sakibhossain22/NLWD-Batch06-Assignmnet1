@@ -14,7 +14,7 @@ const getLength = (value: string | number[]) => {
     if (typeof value === 'string') {
         return value.length
     } else if (Array.isArray(value)) {
-       return value.length
+        return value.length
     }
 
 }
@@ -31,3 +31,20 @@ class Person {
     }
 }
 
+//--------------------------------------------------Problem 4 --------------------------------------------
+
+type Books = {
+    title : string;
+    rating : number
+}
+
+const filterByRating = (arr : Books[]) : Books[] => {
+    return arr.filter(book => book.rating >= 4)
+}
+
+
+
+
+
+
+// -------------------------------- problem 5 --------------------------------------------------
