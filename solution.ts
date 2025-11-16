@@ -80,5 +80,24 @@ const printBookDetails = (books: Book) => {
 
 
 
+// ---------------------'problem 7 --------------------------
+
+const getUniqueValues = (arr1: number[], arr2: number[]) => {
+    let newArray: number[] = []
+    let array1 = arr1
+    let array2 = arr2
+    arr1.find(num => {
+        if (!newArray.includes(num)) {
+            newArray.push(num)
+        }
+    })
+    arr2.find(num => {
+        if (!newArray.includes(num)) {
+            newArray.push(num)
+        }
+    })
+    return newArray
+}
 
 
+// -------------------------- Problem 8 ------------------
