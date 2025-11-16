@@ -76,22 +76,17 @@ const printBookDetails = (books: Book) => {
 
 
 const getUniqueValues = (arr1: number[], arr2: number[]) => {
+    let mergedArray: number[] = [...arr1, ...arr2]
     let newArray: number[] = []
-    let array1 = arr1
-    let array2 = arr2
-    arr1.find(num => {
-        if (!newArray.includes(num)) {
-            newArray.push(num)
+    for (let index = 0; index < mergedArray.length; index++) {
+        const indexItem = mergedArray[index];
+        if(!newArray.includes(indexItem)){
+            newArray.push(indexItem)
         }
-    })
-    arr2.find(num => {
-        if (!newArray.includes(num)) {
-            newArray.push(num)
-        }
-    })
+    }
+
     return newArray
 }
-
 
 
 
@@ -103,10 +98,9 @@ type TPrice = {
 };
 
 const calculateTotalPrice = (products: TPrice[]): number => {
-    return products.reduce((total, product) => {
-        const { price, quantity, discount = 0 } = product;
-        const discountAmount = (price * quantity * discount) / 100;
-        const finalPrice = price * quantity - discountAmount;
-        return total + finalPrice;
+    return products.reduce((total, product) => {  
+        const discountedAmount = (product.price * product.quantity * (product.discount ?? 0)) / 100;
+        const totalPrice = product.price * product.quantity - discountedAmount;
+        return total + totalPrice;
     }, 0);
 };
