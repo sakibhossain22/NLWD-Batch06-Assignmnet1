@@ -31,7 +31,6 @@ class Person {
     }
 }
 
-//--------------------------------------------------Problem 4 --------------------------------------------
 
 type TBooks = {
     title: string;
@@ -44,10 +43,6 @@ const filterByRating = (arr: TBooks[]): TBooks[] => {
 
 
 
-
-
-
-// -------------------------------- problem 5 --------------------------------------------------
 
 
 type Users = {
@@ -63,7 +58,6 @@ const filterActiveUsers = (users: Users[]): Users[] => {
 }
 
 
-// ---------------------'problem 6--------------------------
 
 
 
@@ -80,7 +74,6 @@ const printBookDetails = (books: Book) => {
 
 
 
-// ---------------------'problem 7 --------------------------
 
 const getUniqueValues = (arr1: number[], arr2: number[]) => {
     let newArray: number[] = []
@@ -100,4 +93,20 @@ const getUniqueValues = (arr1: number[], arr2: number[]) => {
 }
 
 
-// -------------------------- Problem 8 ------------------
+
+
+type TPrice = {
+    name: string;
+    price: number;
+    quantity: number;
+    discount?: number;
+};
+
+const calculateTotalPrice = (products: TPrice[]): number => {
+    return products.reduce((total, product) => {
+        const { price, quantity, discount = 0 } = product;
+        const discountAmount = (price * quantity * discount) / 100;
+        const finalPrice = price * quantity - discountAmount;
+        return total + finalPrice;
+    }, 0);
+};
