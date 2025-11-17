@@ -1,4 +1,4 @@
-const formatValue = (value: string | number | boolean) => {
+const formatValue = (value: string | number | boolean): string | number | boolean => {
     if (typeof value === 'string') {
         return value.toUpperCase()
     } else if (typeof value === 'number') {
@@ -6,18 +6,23 @@ const formatValue = (value: string | number | boolean) => {
     } else if (typeof value === 'boolean') {
         return value === true ? false : true
     }
+    return value
 }
 
 
-const getLength = (value: string | number[]) => {
+
+const getLength = (value: string | number[]): number => {
 
     if (typeof value === 'string') {
         return value.length
     } else if (Array.isArray(value)) {
         return value.length
     }
+    return value
 
 }
+
+
 
 class Person {
     name: string;
@@ -27,9 +32,10 @@ class Person {
         this.age = age
     }
     getDetails() {
-        return `Name: ${this.name}, Age: ${this.age}`
+        return `'Name: ${this.name}, Age: ${this.age}'`
     }
 }
+
 
 
 type TBooks = {
@@ -38,7 +44,12 @@ type TBooks = {
 }
 
 const filterByRating = (arr: TBooks[]): TBooks[] => {
-    return arr.filter(book => book.rating >= 4)
+    return arr.filter(book => {
+        if (book.rating > 5) {
+            return
+        }
+        return book.rating >= 4
+    })
 }
 
 
@@ -54,7 +65,15 @@ type Users = {
 
 
 const filterActiveUsers = (users: Users[]): Users[] => {
-    return users.filter(user => user.isActive === true)
+    let activeUser: Users[] = []
+    for (let i = 0; i < users.length; i++) {
+        const element = users[i];
+        if (element.isActive === true) {
+            activeUser[activeUser.length] = element
+        }
+
+    }
+    return activeUser
 }
 
 
@@ -69,19 +88,39 @@ interface Book {
 }
 
 const printBookDetails = (books: Book) => {
-    return `Title: ${books.title}, Author: ${books.author}, Published: ${books.publishedYear}, Available: ${books.isAvailable ? 'Yes' : 'No'}`
+    const { title, author, publishedYear, isAvailable } = books
+    return `Title: ${title}, Author: ${author}, Published: ${publishedYear}, Available: ${isAvailable ? 'Yes' : 'No'}`
 }
 
 
 
+const getUniqueValues = (arr1: number[] | string[], arr2: number[] | string[]): number[] => {
 
-const getUniqueValues = (arr1: number[], arr2: number[]) => {
-    let mergedArray: number[] = [...arr1, ...arr2]
+    let mergedArray: number[] = []
+
+    for (let i = 0; i < arr1.length; i++) {
+        const element = arr1[i];
+        mergedArray[mergedArray.length] = Number(element)
+    }
+    for (let i = 0; i < arr2.length; i++) {
+        const element = arr2[i];
+        mergedArray[mergedArray.length] = Number(element)
+    }
+
+
     let newArray: number[] = []
+
     for (let index = 0; index < mergedArray.length; index++) {
         const indexItem = mergedArray[index];
-        if(!newArray.includes(indexItem)){
-            newArray.push(indexItem)
+        let matched = false
+        for (let i = 0; i < newArray.length; i++) {
+            const element = newArray[i];
+            if (indexItem === element) {
+                matched = true
+            }
+        }
+        if (matched === false) {
+            newArray[newArray.length] = indexItem
         }
     }
 
@@ -98,9 +137,19 @@ type TPrice = {
 };
 
 const calculateTotalPrice = (products: TPrice[]): number => {
-    return products.reduce((total, product) => {  
-        const discountedAmount = (product.price * product.quantity * (product.discount ?? 0)) / 100;
-        const totalPrice = product.price * product.quantity - discountedAmount;
-        return total + totalPrice;
-    }, 0);
+    if (products.length) {
+        return products.reduce((total, product) => {
+            const discountedAmount = (product.price * product.quantity * (product.discount ?? 0)) / 100;
+            const totalPrice = product.price * product.quantity - discountedAmount;
+            return total + totalPrice;
+        }, 0);
+    }
+    return 0
 };
+const products = [
+  { name: 'Pen', price: 10, quantity: 2 },
+  { name: 'Notebook', price: 25, quantity: 3, discount: 10 },
+  { name: 'Bag', price: 50, quantity: 1, discount: 20 },
+];
+
+console.log(calculateTotalPrice(products));
