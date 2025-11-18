@@ -11,7 +11,7 @@ const formatValue = (value: string | number | boolean): string | number | boolea
 
 
 
-const getLength = (value: string | number[]): number => {
+const getLength = (value: string | number[] | string[]): number => {
 
     if (typeof value === 'string') {
         return value.length
@@ -54,8 +54,6 @@ const filterByRating = (arr: TBooks[]): TBooks[] => {
 
 
 
-
-
 type Users = {
     id: number;
     name: string;
@@ -75,7 +73,6 @@ const filterActiveUsers = (users: Users[]): Users[] => {
     }
     return activeUser
 }
-
 
 
 
